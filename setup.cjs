@@ -3,7 +3,7 @@ const path = require("node:path");
 
 process.env.PGADMIN_SERVER_MODE = "OFF";
 
-const pythonPath = `/Users/lixu/play/playground/flask_admin/venv/bin/python3`;
+const pythonPath = `/Users/lixu/code/flask_admin/venv/bin/python3`;
 const pgadminFile = "./main.py";
 
 pgadminServerProcess = spawn(path.resolve(pythonPath), [
