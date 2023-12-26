@@ -1,0 +1,43 @@
+{
+  "name": "flask_admin",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "test": "node ./setup",
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "@material-ui/core": "4.12.4",
+    "@material-ui/icons": "^4.11.2",
+    "@material-ui/lab": "4.0.0-alpha.61",
+    "@material-ui/pickers": "3.3.10",
+    "@mui/icons-material": "^5.14.16",
+    "@mui/lab": "5.0.0-alpha.152",
+    "@mui/material": "^5.14.17",
+    "@mui/styles": "^5.14.17",
+    "@mui/x-date-pickers": "^6.18.1",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.4",
+    "moment-timezone": "^0.5.34",
+    "rc-dock": "^3.2.18",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    "@vitejs/plugin-react": "^4.0.3",
+    "eslint": "^8.45.0",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.3",
+    "prop-type": "^0.0.1",
+    "prop-types": "^15.7.2",
+    "vite": "^4.4.5"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

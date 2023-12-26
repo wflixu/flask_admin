@@ -1,0 +1,192 @@
+/* 
+@import "node_modules/@fortawesome/fontawesome-free/css/all.css";
+@import "node_modules/leaflet/dist/leaflet.css";
+
+@import "node_modules/codemirror/lib/codemirror.css";
+@import "node_modules/codemirror/addon/dialog/dialog.css";
+@import "node_modules/codemirror/addon/scroll/simplescrollbars.css";
+
+@import "node_modules/xterm/css/xterm.css";
+
+@import "node_modules/jsoneditor/dist/jsoneditor.min.css";
+@import "node_modules/react-checkbox-tree/lib/react-checkbox-tree.css";
+
+@import "node_modules/@simonwep/pickr/dist/themes/monolith.min.css";
+
+@import "node_modules/uplot/dist/uPlot.min.css";
+
+/* wcDocker dependencies */
+/* @import "node_modules/today-ui-webcabin-docker/Build/wcDocker.css";
+@import "node_modules/jquery-contextmenu/dist/jquery.contextMenu.css";  */
+
+
+/* Styles for the main browser */
+.browser-pane-container {
+  position: absolute;
+  top: 50px;
+  left: 0px;
+  width: 100%;
+  height: calc(100% - 50px); /* Offset for the nav bar */
+  z-index: -1;
+}
+
+.browser-browser-pane {
+  overflow: auto;
+}
+
+.browser-inner-pane {
+  padding: 0px;
+  overflow: hidden;
+}
+
+.browser-center-pane {
+  overflow: hidden;
+  padding: 0px;
+  padding-bottom: 50px /* Offset the nav bar to ensure there's enough scroll space */
+}
+
+.browser-tab-panes {
+  height: 100%;
+}
+
+.browser-tab-pane {
+  height: 100%;
+}
+
+.browser-tab-content {
+  width: 100%;
+  height: 100%;
+}
+
+.pgadmin-node-select option {
+padding-left: 20px;
+}
+
+.pg-login-icon {
+font-size: 16px;
+}
+
+.pgadmin_header_logo {
+cursor: default;
+}
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+
+
+@font-face {
+  font-family: "Source Code Pro";
+  src: url("~top/static/fonts/SourceCodePro-Regular.ttf") format("truetype");
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("~top/static/fonts/Roboto-Regular.ttf") format("truetype");
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+}
+
+@font-face {
+  font-family: "Roboto Medium";
+  src: url("~top/static/fonts/Roboto-Medium.ttf") format("truetype");
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+}
+
+
+@font-face {
+  font-family: "Roboto Bold";
+  src: url("~top/static/fonts/Roboto-Bold.ttf") format("truetype");
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media screen and (forced-colors: active) {
+  body {
+    forced-color-adjust: none !important;
+  }
+}
