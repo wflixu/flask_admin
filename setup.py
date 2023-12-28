@@ -16,8 +16,4 @@ if sys.path[0] != root:
 import builtins
 import config
 
-# Grab the SERVER_MODE if it's been set by the runtime
-if 'SERVER_MODE' in globals():
-    builtins.SERVER_MODE = globals()['SERVER_MODE']
-else:
-    builtins.SERVER_MODE = None
+
