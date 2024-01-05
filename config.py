@@ -423,6 +423,18 @@ AUTO_DISCOVER_SERVERS = True
 SERVER_HEARTBEAT_TIMEOUT = 30  # In seconds
 
 
+##########################################################################
+# Email address validation
+##########################################################################
+
+# flask-security-too will validate email addresses and check deliverability
+# by default. Disable the deliverability check by default, which was the old
+# behaviour in <= v5.3
+CHECK_EMAIL_DELIVERABILITY = False
+SECURITY_EMAIL_VALIDATOR_ARGS = \
+    {"check_deliverability": CHECK_EMAIL_DELIVERABILITY}
+
+
 #############################################################################
 # Patch the default config with custom config and other manipulations
 #############################################################################

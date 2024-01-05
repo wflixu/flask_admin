@@ -1,7 +1,6 @@
 # pgdamin4 调试简化版代码库
 去掉 nwjs，去掉flask 模版
 
-
 ## 安装使用
 ```
 # 创建虚拟环境
@@ -20,3 +19,10 @@ pnpm run start
 
 
 pgadmin => create_app
+
+
+/etc/postgres-reg.ini  文件是 PG 的配置文件夹
+
+现在不知道react 组件是怎么加载出来的，
+
+

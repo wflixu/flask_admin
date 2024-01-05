@@ -36,12 +36,15 @@ from pgadmin.setup.db_version import get_version, set_version
 from pgadmin.utils.session import create_session_interface, pga_unauthorised
 from pgadmin.utils.constants import INTERNAL
 from pgadmin.utils import driver, heartbeat
+from pgadmin.utils.preferences import Preferences
 from pgadmin.utils.versioned_template_loader import VersionedTemplateLoader
 from pgadmin.model import (
+    ServerGroup,
     db,
     User,
     Role,
     Keys,
+    Server,
     SCHEMA_VERSION as CURRENT_SCHEMA_VERSION,
 )
 
@@ -176,6 +179,12 @@ class PgAdmin(Flask):
         ):
             self.logout_hooks.append(module)
 
+def _find_blueprint():
+    if request.blueprint:
+        return current_app.blueprints[request.blueprint]
+
+
+current_blueprint = LocalProxy(_find_blueprint)
 
 
 def create_app(app_name=None):
@@ -281,7 +290,7 @@ def create_app(app_name=None):
 
     def get_locale():
         """Get the language for the user."""
-        language = "en"
+        language = "zh"
         
         # If language is available in get request then return the same
         # otherwise check the session or cookie
@@ -297,6 +306,11 @@ def create_app(app_name=None):
         return language
 
     babel.init_app(app, locale_selector=get_locale)
+    
+    print('=='*20)
+
+   
+    
     ##########################################################################
     # Setup authentication
     ##########################################################################
@@ -435,6 +449,7 @@ def create_app(app_name=None):
 
     # Run the migration as per specified by the user.
     if config.CONFIG_DATABASE_URI is not None and len(config.CONFIG_DATABASE_URI) > 0:
+        print('--'*20)
         run_migration_for_others()
     else:
         run_migration_for_sqlite()
@@ -583,67 +598,11 @@ def create_app(app_name=None):
             db.session.add(svr)
             db.session.commit()
 
-        # Figure out what servers are present
-        if winreg is not None:
-            arch_keys = set()
-            proc_arch = os.environ["PROCESSOR_ARCHITECTURE"].lower()
+        
+        # We use the postgres-winreg.ini file on non-Windows
+        from configparser import ConfigParser
 
-            try:
-                proc_arch64 = os.environ["PROCESSOR_ARCHITEW6432"].lower()
-            except Exception:
-                proc_arch64 = None
-
-            if proc_arch == "x86" and not proc_arch64:
-                arch_keys.add(0)
-            elif proc_arch == "x86" or proc_arch == "amd64":
-                arch_keys.add(winreg.KEY_WOW64_32KEY)
-                arch_keys.add(winreg.KEY_WOW64_64KEY)
-
-            for arch_key in arch_keys:
-                for server_type in ("PostgreSQL", "EnterpriseDB"):
-                    try:
-                        root_key = winreg.OpenKey(
-                            winreg.HKEY_LOCAL_MACHINE,
-                            "SOFTWARE\\" + server_type + "\\Services",
-                            0,
-                            winreg.KEY_READ | arch_key,
-                        )
-                        for i in range(0, winreg.QueryInfoKey(root_key)[0]):
-                            inst_id = winreg.EnumKey(root_key, i)
-                            inst_key = winreg.OpenKey(root_key, inst_id)
-
-                            svr_name = winreg.QueryValueEx(inst_key, "Display Name")[0]
-                            svr_superuser = winreg.QueryValueEx(
-                                inst_key, "Database Superuser"
-                            )[0]
-                            svr_port = winreg.QueryValueEx(inst_key, "Port")[0]
-                            svr_discovery_id = inst_id
-                            svr_comment = gettext(
-                                "Auto-detected {0} installation with the data "
-                                "directory at {1}"
-                            ).format(
-                                winreg.QueryValueEx(inst_key, "Display Name")[0],
-                                winreg.QueryValueEx(inst_key, "Data Directory")[0],
-                            )
-
-                            add_server(
-                                user_id,
-                                servergroup_id,
-                                svr_name,
-                                svr_superuser,
-                                svr_port,
-                                svr_discovery_id,
-                                svr_comment,
-                            )
-
-                            inst_key.Close()
-                    except Exception:
-                        pass
-        else:
-            # We use the postgres-winreg.ini file on non-Windows
-            from configparser import ConfigParser
-
-            registry = ConfigParser()
+        registry = ConfigParser()
 
         try:
             registry.read("/etc/postgres-reg.ini")
@@ -908,11 +867,7 @@ def create_app(app_name=None):
     # Intialize the key manager
     app.keyManager = KeyManager()
 
-    ##########################################################################
-    # Protection against CSRF attacks
-    ##########################################################################
-    with app.app_context():
-        pgCSRFProtect.init_app(app)
+
 
     ##########################################################################
     # All done!
